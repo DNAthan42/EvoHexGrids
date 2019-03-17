@@ -7,6 +7,7 @@ public class InputManager : MonoBehaviour
 
     public Transform GridsParent;
     public int seed = 0;
+    public float MutationProb = .1f;
     private HexGrid[] Grids;
 
     void Start()
@@ -21,6 +22,8 @@ public class InputManager : MonoBehaviour
                 for (int i = 0; i < grid.cells.Length; i++)
                     grid.ColorCell(i, HexGrid.colors[(int)Random.Range(0, 4)]);
         }
+
+        Mutator.MutationProb = this.MutationProb;
     }
 
     void Update()
@@ -51,6 +54,8 @@ public class InputManager : MonoBehaviour
             }
             else
             {
+                temp = Mutator.Mutate(temp);
+                print(temp);
                 grid.Deserialize(temp);
                 temp = null;
             }
