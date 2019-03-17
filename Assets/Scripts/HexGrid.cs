@@ -12,7 +12,8 @@ public class HexGrid : MonoBehaviour {
 	public HexCell cellPrefab;
 	public Text cellLabelPrefab;
 
-	HexCell[] cells;
+    [HideInInspector]
+	public HexCell[] cells;
 
 	Canvas gridCanvas;
 	HexMesh hexMesh;
@@ -40,10 +41,15 @@ public class HexGrid : MonoBehaviour {
 		position = transform.InverseTransformPoint(position);
 		HexCoordinates coordinates = HexCoordinates.FromPosition(position);
 		int index = coordinates.X + coordinates.Z * width + coordinates.Z / 2;
+        ColorCell(index, color);
+	}
+
+    public void ColorCell(int index, Color color)
+    {
 		HexCell cell = cells[index];
 		cell.color = color;
 		hexMesh.Triangulate(cells);
-	}
+    }
 
 	void CreateCell (int x, int z, int i, Color c) {
 		Vector3 position;

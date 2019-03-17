@@ -61,6 +61,11 @@ public struct HexCoordinates {
 		return new HexCoordinates(iX, iZ);
 	}
 
+    public Vector3 ToVector()
+    {
+        return new Vector3(X, Y, Z);
+    }
+
 	public override string ToString () {
 		return "(" +
 			X.ToString() + ", " + Y.ToString() + ", " + Z.ToString() + ")";
