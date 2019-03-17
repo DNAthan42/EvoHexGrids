@@ -93,4 +93,10 @@ public class HexGrid : MonoBehaviour {
             //If you want to add new features to a cell, you'll need to do additional processign to string pieces here.
             ColorCell(i, Helper.StringToColor[data[i]]);
     }
+
+    public void Randomize()
+    {
+        for (int i = 0; i < cells.Length; i++)
+            ColorCell(i, HexGrid.colors[(int)Random.Range(0, 4)]);
+    }
 }

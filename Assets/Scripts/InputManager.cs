@@ -21,8 +21,7 @@ public class InputManager : MonoBehaviour
             Random.InitState(seed);
             foreach (HexGrid grid in Grids)
                 //change the color of each cell according to the given seed.
-                for (int i = 0; i < grid.cells.Length; i++)
-                    grid.ColorCell(i, HexGrid.colors[(int)Random.Range(0, 4)]);
+                grid.Randomize();
         }
 
         Mutator.MutationProb = this.MutationProb;
@@ -65,6 +64,24 @@ public class InputManager : MonoBehaviour
         else
         {
             text.text = "Next Generation";
+
+            //copy
+            Grids[0].Deserialize(firstGrid);
+            Grids[1].Deserialize(secondGrid);
+
+            //mutations
+            Grids[2].Deserialize(Mutator.Mutate(firstGrid));
+            Grids[3].Deserialize(Mutator.Mutate(secondGrid));
+
+            //crossovers
+            string[] crosses = Mutator.Crossover(firstGrid, secondGrid);
+            Grids[4].Deserialize(crosses[0]);
+            Grids[5].Deserialize(crosses[1]);
+
+            //random
+            Grids[6].Randomize();
+            Grids[7].Randomize();
+
             firstGrid = secondGrid = null;
         }
     }
