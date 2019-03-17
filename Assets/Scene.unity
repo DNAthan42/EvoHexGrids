@@ -803,6 +803,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GridsParent: {fileID: 276061320}
   seed: 1
+  MutationProb: 0.1
+  Crossover: 10
 --- !u!1 &806510626
 GameObject:
   m_ObjectHideFlags: 0

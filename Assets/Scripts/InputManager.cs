@@ -8,6 +8,7 @@ public class InputManager : MonoBehaviour
     public Transform GridsParent;
     public int seed = 0;
     public float MutationProb = .1f;
+    public int Crossover = 10;
     private HexGrid[] Grids;
 
     void Start()
@@ -24,6 +25,7 @@ public class InputManager : MonoBehaviour
         }
 
         Mutator.MutationProb = this.MutationProb;
+        Mutator.CrossoverPoint = this.Crossover;
     }
 
     void Update()
@@ -35,6 +37,7 @@ public class InputManager : MonoBehaviour
     }
 
     string temp;
+    string temp2;
 
     void HandleInput()
     {
@@ -52,12 +55,17 @@ public class InputManager : MonoBehaviour
                 temp = grid.Serialize();
                 print(temp);
             }
+            else if (temp2 == null)
+            {
+                temp2 = grid.Serialize();
+                print(temp);
+            }
             else
             {
-                temp = Mutator.Mutate(temp);
-                print(temp);
-                grid.Deserialize(temp);
+                string[] cross = Mutator.Crossover(temp, temp2);
+                grid.Deserialize(cross[0]);
                 temp = null;
+                temp2 = null;
             }
 
         }
