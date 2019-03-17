@@ -84,4 +84,13 @@ public class HexGrid : MonoBehaviour {
         }
         return result;
     }
+
+    public void Deserialize(string source)
+    {
+        string[] data = source.Split(',');
+        if (data.Length != cells.Length) print("Source length does not match grid size.");
+        for (int i = 0; i < cells.Length; i++)
+            //If you want to add new features to a cell, you'll need to do additional processign to string pieces here.
+            ColorCell(i, Helper.StringToColor[data[i]]);
+    }
 }

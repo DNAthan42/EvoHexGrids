@@ -31,6 +31,8 @@ public class InputManager : MonoBehaviour
         }
     }
 
+    string temp;
+
     void HandleInput()
     {
         Ray inputRay = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -38,10 +40,22 @@ public class InputManager : MonoBehaviour
         if (Physics.Raycast(inputRay, out hit))
         {
             //TouchCell(hit.point);
-            GameObject grid = hit.transform.parent.gameObject;
-            print(grid.name);
-            print(grid.GetComponent<HexGrid>().Serialize());
+            GameObject gridObj = hit.transform.parent.gameObject;
+            HexGrid grid = gridObj.GetComponent<HexGrid>();
+
+            print(gridObj.name);
+            if (temp == null)
+            {
+                temp = grid.Serialize();
+                print(temp);
+            }
+            else
+            {
+                grid.Deserialize(temp);
+                temp = null;
+            }
+
         }
     }
-   
+    
 }
