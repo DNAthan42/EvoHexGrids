@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InputManager : MonoBehaviour
 {
@@ -36,8 +37,8 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    string temp;
-    string temp2;
+    string firstGrid;
+    string secondGrid;
 
     void HandleInput()
     {
@@ -48,26 +49,23 @@ public class InputManager : MonoBehaviour
             //TouchCell(hit.point);
             GameObject gridObj = hit.transform.parent.gameObject;
             HexGrid grid = gridObj.GetComponent<HexGrid>();
+            //print(gridObj.name);
 
-            print(gridObj.name);
-            if (temp == null)
-            {
-                temp = grid.Serialize();
-                print(temp);
-            }
-            else if (temp2 == null)
-            {
-                temp2 = grid.Serialize();
-                print(temp);
-            }
-            else
-            {
-                string[] cross = Mutator.Crossover(temp, temp2);
-                grid.Deserialize(cross[0]);
-                temp = null;
-                temp2 = null;
-            }
+            secondGrid = firstGrid;
+            firstGrid = grid.Serialize();
+        }
+    }
 
+    public void NextGeneration(Text text)
+    {
+        if (firstGrid == null || secondGrid == null)
+        {
+            text.text = "Must Select Two Grids";
+        }
+        else
+        {
+            text.text = "Next Generation";
+            firstGrid = secondGrid = null;
         }
     }
     
