@@ -38,7 +38,9 @@ public class InputManager : MonoBehaviour
         if (Physics.Raycast(inputRay, out hit))
         {
             //TouchCell(hit.point);
-            print(hit.transform.parent.gameObject.name);
+            GameObject grid = hit.transform.parent.gameObject;
+            print(grid.name);
+            print(grid.GetComponent<HexGrid>().Serialize());
         }
     }
    

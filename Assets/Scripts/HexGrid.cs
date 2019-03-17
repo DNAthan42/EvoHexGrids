@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class HexGrid : MonoBehaviour {
@@ -69,4 +70,18 @@ public class HexGrid : MonoBehaviour {
 			new Vector2(position.x, position.z);
 		label.text = cell.coordinates.ToStringOnSeparateLines();
 	}
+
+    public string Serialize()
+    {
+        string result = "";
+        for (int i = 0; i < cells.Length; i++)
+        {
+            //don't prepend a comma to the start of the list.
+            result += (i == 0) ? "" : ",";
+
+            result += $"{Helper.ColorToString[cells[i].color]}";
+            //add other features of a gridspace here.
+        }
+        return result;
+    }
 }
