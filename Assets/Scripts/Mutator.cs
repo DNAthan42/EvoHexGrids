@@ -23,7 +23,7 @@ public class Mutator : MonoBehaviour
                 string temp = data[i];
                 //don't mutate to the same color.
                 while (temp == data[i])
-                    temp = Helper.ColorToString[HexGrid.colors[(int)Random.Range(0, 4)]];
+                    temp = Helper.ColorToString[Helper.RandomColor()];
 
                 mutated += temp;
             }

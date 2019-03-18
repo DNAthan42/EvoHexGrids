@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class HexGrid : MonoBehaviour {
 
-    static public Color[] colors = { Color.white, Color.blue, Color.green, Color.yellow };
+    static public Color[] colors = { Color.white, Color.blue, Color.green, Color.yellow, Color.red };
     public int width = 6;
 	public int height = 6;
 
@@ -28,7 +28,7 @@ public class HexGrid : MonoBehaviour {
 		for (int z = 0, i = 0; z < height; z++) {
 			for (int x = 0; x < width; x++)
 			{
-			    Color c = colors[(int)Random.Range(0, 4)];
+                Color c = Helper.RandomColor();
 				CreateCell(x, z, i++, c );
 			}
 		}
@@ -97,6 +97,6 @@ public class HexGrid : MonoBehaviour {
     public void Randomize()
     {
         for (int i = 0; i < cells.Length; i++)
-            ColorCell(i, HexGrid.colors[(int)Random.Range(0, 4)]);
+            ColorCell(i, Helper.RandomColor());
     }
 }
